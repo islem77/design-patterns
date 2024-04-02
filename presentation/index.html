@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Exploring Design Patterns: Examples, Applications, and Best Practices</title>
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<style>
+		.background-image {
+			background-image: url('https://place.abh.ai/s3fs-public/2023-04/patterns.jpg');
+			background-size: cover;
+			background-position: center;
+			position: relative;
+			height: 100vh;
+			/* Set the height to fit the viewport */
+		}
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(255, 255, 255, 1);
+			/* Adjust opacity as needed */
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+
+		.overlay h3 {
+			margin-bottom: 20px;
+		}
+
+		.overlay ul {
+			list-style-type: none;
+			padding: 0;
+		}
+
+		.overlay ul li {
+			margin-bottom: 5px;
+		}
+
+		.split-container {
+			display: flex;
+			align-items: center;
+		}
+
+		.image-container {
+			width: 40%;
+			padding-right: 20px;
+		}
+
+		.image-container img {
+			width: 100%;
+		}
+
+		.text-container {
+			width: 60%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section class="background-image">
+				<div class="overlay">
+					<h3>Exploring Design Patterns</h3>
+					<h4>Examples, Applications, and Best Practices</h4>
+					<p>
+						<small>Created by <ul>
+								<li>Mohamed Habib Jaouadi - Islem Bennour - Moulay Ab Mohamed - Lassaad Jarray</li>
+							</ul>
+						</small>
+					</p>
+				</div>
+			</section>
+			<section>
+				<section>
+					<h2>Introduction</h2>
+					<h4>What Are Design Patterns?</h4>
+					<ul>
+						<li>Fundamental part of software development</li>
+						<li>Provide typical solutions to commonly recurring problems in software design</li>
+						<li>Concepts that can be used to handle recurring themes in an optimized way</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Introduction</h2>
+					<h4>Why Use Design Patterns?</h4>
+					<div style="display: flex; align-items: center;">
+						<img src="https://ginbits.com/wp-content/uploads/2021/03/Design-Patterns-a-software-engineer%CE%93COs-handbook@2x.png"
+							alt="Design Patterns Handbook" style="height: 100px; margin-right: 20px;">
+						<ul>
+							<li>
+								<small>Standardized solutions to common problems</small>
+							</li>
+							<li>
+								<small>Promote code reuse and maintainability</small>
+							</li>
+							<li>
+								<small>Improve scalability and flexibility</small>
+							</li>
+							<li>
+								<small>Facilitate communication among developers</small>
+							</li>
+							<li>
+								<small>Reduce development time and effort</small>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Agenda</h2>
+					<ol>
+						<!-- Introduction to Design Patterns: Learn about the basic concepts of design patterns and their importance in software development. -->
+						<li>Introduction to Design Patterns</li>
+						<!-- Benefits of Using Design Patterns: Discover the advantages of incorporating design patterns into your software development process. -->
+						<li>Benefits of Using Design Patterns</li>
+						<!-- Common Design Patterns: Explore some of the most widely used design patterns and understand their applications. -->
+						<li>Common Design Patterns</li>
+						<!-- Best Practices for Implementing Design Patterns: Learn the best practices and guidelines for effectively implementing design patterns in your projects. -->
+						<li>Best Practices for Implementing Design Patterns</li>
+						<!-- Conclusion: Summarize the key takeaways from the presentation and discuss future considerations for applying design patterns in your work. -->
+						<li>Conclusion</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Notes</h2>
+					<div class="split-container">
+						<div class="image-container">
+							<img src="https://refactoring.guru/images/patterns/languages/python.png"
+								alt="Python Programming Language">
+						</div>
+						<div class="text-container">
+							<em>All code examples in this presentation will be Python.</em>
+							<p>
+								<em>The code snippets used in this presentation are taken from <a
+										href="https://refactoring.guru/design-patterns/python">refactoring.guru</a>.
+								</em>
+							</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Section 1</h6>
+							</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<h3>Introduction to Design Patterns</h3>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-background="#4d7e65">
+					<h4>Definition and Relevance</h4>
+					<img src="https://refactoring.guru/images/patterns/content/index-design-patterns.png"
+						style="width: 50%;" />
+					<ul>
+						<li>Fundamental principles in software development</li>
+						<li>Standardized solutions to common problems. </li>
+						<li>They play a crucial role in improving: <ul>
+								<li>code quality</li>
+								<li>maintainability</li>
+								<li>scalability</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section data-background="#4d7e65">
+					<h2>Categories of Design Patterns</h2>
+					<div style="display: flex; align-items: center;">
+						<img src="https://refactoring.guru/images/refactoring/content/catalog/dealing-with-generalization.png"
+							style="width: 30%; margin-right: 20px;" />
+						<ul>
+							<li>
+								<strong>Creational Patterns:</strong>
+								<small>Focus on object creation mechanisms, providing flexibility in object creation and
+									hiding the creation logic.</small>
+							</li>
+							<li>
+								<strong>Structural Patterns:</strong>
+								<small>Deal with object composition and class inheritance, emphasizing the ways objects
+									can be composed to form larger structures.</small>
+							</li>
+							<li>
+								<strong>Behavioral Patterns:</strong>
+								<small>Focus on how objects interact and communicate with each other, defining patterns
+									for communication between objects.</small>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+				<section>
+					<table>
+						<tr>
+							<th>
+								<h6>Section 2</h6>
+							</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<h3>Creational Design Patterns</h3>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-background="#BB8493">
+					<div style="text-align: left;">
+						<h2>Creational Design Patterns</h2>
+						<ul>
+							<li>
+								<small>Creational design patterns provide various object creation mechanisms, which
+									increase flexibility and reuse of existing code.</small>
+							</li>
+							<li>
+								<small>They provide flexible ways to create objects while hiding the creation logic,
+									thus promoting code reusability and maintainability.</small>
+							</li>
+						</ul>
+					</div>
+					<img src="dist/creational.png" alt="Creational Design Patterns" />
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Factory Method</h6>
+							</th>
+							<th>Concept </th>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://refactoring.guru/images/patterns/cards/factory-method-mini.png"
+									alt="Factory Method">
+							</td>
+							<td>
+								<small>The Factory Method pattern defines an interface for creating an object, but
+									allows subclasses to alter the type of objects that will be instantiated.</small>
+								<small>It promotes loose coupling by eliminating the need to bind application-specific
+									classes into the code.</small>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Factory Method</h6>
+							</th>
+							<th>Problem Statement </th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<small>An the initial logistics management application version only handles
+									transportation by trucks, with most of the code residing within the Truck class.
+								</small>
+								<small>As the app gains popularity, requests to incorporate sea logistics arise, posing
+									a challenge due to the tightly coupled nature of the code. Introducing a new
+									transportation class becomes complex, requiring modifications throughout the
+									codebase. </small>
+								<small>This results in code cluttered with conditionals to accommodate different
+									transportation types, leading to maintenance difficulties and decreased scalability.
+								</small>
+							</td>
+						</tr>
+					</table>
+					<img src="dist/factoryexample.png" alt="">
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Factory Method</h6>
+							</th>
+							<th>Initial Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+										<code class="hljs python" data-trim data-line-numbers="|10-12|14-16|1-8|18-25">
+											<script type="text/template">
+						
+class LogisticsApp:
+    def deliver_package(self, transport_type):
+        if transport_type == 'truck':
+            truck = Truck()
+            truck.deliver()
+        elif transport_type == 'ship':
+            ship = Ship()
+            ship.deliver()
+
+class Truck:
+    def deliver(self):
+        print("Delivering by truck...")
+
+class Ship:
+    def deliver(self):
+        print("Delivering by ship...")
+
+if __name__ == "__main__":
+    app = LogisticsApp()
+    
+    # Deliver package by truck
+    app.deliver_package('truck')
+    
+    # Deliver package by ship
+    app.deliver_package('ship')
+
+					</script>
+										</code>
+									</pre>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Factory Method</h6>
+							</th>
+							<th>Refactored Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+										<code class="hljs python" >
+											<script type="text/template">
+class Transport:
+    def deliver(self):
+        pass
+
+class Truck(Transport):
+    def deliver(self):
+        print("Delivering by truck...")
+
+class Ship(Transport):
+    def deliver(self):
+        print("Delivering by ship...")
+
+class TransportFactory:
+    def create_transport(self, transport_type):
+        if transport_type == 'truck':
+            return Truck()
+        elif transport_type == 'ship':
+            return Ship()
+
+class LogisticsApp:
+    def __init__(self):
+        self.factory = TransportFactory()
+
+    def deliver_package(self, transport_type):
+        transport = self.factory.create_transport(transport_type)
+        transport.deliver()
+
+if __name__ == "__main__":
+    app = LogisticsApp()
+
+    # Deliver package by truck
+    app.deliver_package('truck')
+
+    # Deliver package by ship
+    app.deliver_package('ship')
+
+									</script>
+										</code>
+									</pre>
+				</section>
+				<section data-transition="slide" data-background="#BB8493">
+					<h2>Factory Design Pattern</h2>
+					<div>
+						<table>
+							<tr>
+								<th> Strengths </th>
+								<th> Weaknesses </th>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li>
+											<small>Encapsulates object creation.</small>
+										</li>
+										<li>
+											<small>Promotes loose coupling.</small>
+										</li>
+										<li>
+											<small>Supports scalability.</small>
+										</li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li>
+											<small>May introduce complexity.</small>
+										</li>
+										<li>
+											<small>Limits customization.</small>
+										</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<h6>Use Cases</h6>
+						<ul>
+							<li>
+								<small>Centralized or encapsulated object creation.</small>
+							</li>
+							<li>
+								<small>Decoupling client code from concrete classes.</small>
+							</li>
+							<li>
+								<small>Supporting multiple object types.</small>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Abstract Factory</h6>
+							</th>
+							<th>Concept </th>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://refactoring.guru/images/patterns/cards/abstract-factory-mini.png"
+									alt="Abstract Factory">
+							</td>
+							<td>
+								<small>The Abstract Factory pattern is a creational design pattern that provides an
+									interface for creating families of related or dependent objects without specifying
+									their concrete classes. </small>
+								<small>It allows you to encapsulate the creation of multiple related objects, ensuring
+									that they are all of the same type and belong to the same family. </small>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Abstract Factory</h6>
+							</th>
+							<th>Initial Code (same example) </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+											<code class="hljs python" data-trim data-line-numbers="|10-12|14-16|1-8|18-25">
+												<script type="text/template">
+										
+				class LogisticsApp:
+				    def deliver_package(self, transport_type):
+				        if transport_type == 'truck':
+				            truck = Truck()
+				            truck.deliver()
+				        elif transport_type == 'ship':
+				            ship = Ship()
+				            ship.deliver()
+				
+				class Truck:
+				    def deliver(self):
+				        print("Delivering by truck...")
+				
+				class Ship:
+				    def deliver(self):
+				        print("Delivering by ship...")
+				
+				if __name__ == "__main__":
+				    app = LogisticsApp()
+				    
+				    # Deliver package by truck
+				    app.deliver_package('truck')
+				    
+				    # Deliver package by ship
+				    app.deliver_package('ship')
+				
+									</script>
+											</code>
+										</pre>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Abstract Factory</h6>
+							</th>
+							<th>Refactored Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+											<code class="hljs python" >
+												<script type="text/template">
+from abc import ABC, abstractmethod
+
+class Transport(ABC):
+    @abstractmethod
+    def deliver(self):
+        pass
+
+class Truck(Transport):
+    def deliver(self):
+        print("Delivering by truck...")
+
+class Ship(Transport):
+    def deliver(self):
+        print("Delivering by ship...")
+
+class TransportFactory(ABC):
+    @abstractmethod
+    def create_transport(self):
+        pass
+
+class TruckFactory(TransportFactory):
+    def create_transport(self):
+        return Truck()
+
+class ShipFactory(TransportFactory):
+    def create_transport(self):
+        return Ship()
+
+class LogisticsApp:
+    def __init__(self):
+        self.truck_factory = TruckFactory()
+        self.ship_factory = ShipFactory()
+
+    def deliver_package_by_truck(self):
+        transport = self.truck_factory.create_transport()
+        transport.deliver()
+
+    def deliver_package_by_ship(self):
+        transport = self.ship_factory.create_transport()
+        transport.deliver()
+
+if __name__ == "__main__":
+    app = LogisticsApp()
+
+    # Deliver package by truck
+    app.deliver_package_by_truck()
+
+    # Deliver package by ship
+    app.deliver_package_by_ship()
+
+													</script>
+											</code>
+										</pre>
+				</section>
+				<section data-transition="slide" data-background="#BB8493">
+					<h2>Abstract Factory Design Pattern</h2>
+					<div>
+						<table>
+							<tr>
+								<th>Strengths</th>
+								<th>Weaknesses</th>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li>
+											<small>Creates families of related objects.</small>
+										</li>
+										<li>
+											<small>Encapsulates object creation.</small>
+										</li>
+										<li>
+											<small>Promotes loose coupling.</small>
+										</li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li>
+											<small>Can be complex to implement.</small>
+										</li>
+										<li>
+											<small>May result in a large number of classes/interfaces.</small>
+										</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<h6>Use Cases</h6>
+						<ul>
+							<li>
+								<small>Creating families of related objects.</small>
+							</li>
+							<li>
+								<small>Decoupling client code from concrete classes.</small>
+							</li>
+							<li>
+								<small>Supporting multiple object types and variations.</small>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h2>Factory Vs. Abstract Factory Design Pattern</h2>
+					<ul>
+						<li>
+							<small>In the Factory Method pattern, the TransportFactory creates instances of Truck or
+								Ship based on the provided type. </small>
+						</li>
+						<li>
+							<small> In the Abstract Factory pattern, separate factories (TruckFactory and ShipFactory)
+								are responsible for creatinginstances of their respective products (Truck and Ship).
+							</small>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Factory Vs. Abstract Factory Design Pattern</h2>
+					<table style="width: 100%;">
+						<tr>
+							<th style="width: 33.33%;">Aspect</th>
+							<th style="width: 33.33%;">Factory Method</th>
+							<th style="width: 33.33%;">Abstract Factory</th>
+						</tr>
+						<tr>
+							<td>Purpose</td>
+							<td>
+								<small>Creates a single object based on a specified class hierarchy.</small>
+							</td>
+							<td>
+								<small>Creates families of related objects without specifying their concrete
+									classes.</small>
+							</td>
+						</tr>
+						<tr>
+							<td>Class Structure</td>
+							<td>
+								<small>Typically consists of a Creator class and ConcreteCreator classes.</small>
+							</td>
+							<td>
+								<small>Typically consists of an Abstract Factory interface and multiple Concrete Factory
+									implementations.</small>
+							</td>
+						</tr>
+						<tr>
+							<td>Usage</td>
+							<td>
+								<small>Suitable when the creation logic may vary among subclasses.</small>
+							</td>
+							<td>
+								<small>Suitable when the system needs to support multiple families of related
+									objects.</small>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Builder</h6>
+							</th>
+							<th>Concept </th>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://refactoring.guru/images/patterns/cards/builder-mini.png"
+									alt="Builder">
+							</td>
+							<td>
+								<small>Builder is a creational design pattern that lets you construct complex objects
+									step by step. </small>
+								<small>The pattern allows you to produce different types and representations of an
+									object using the same construction code. </small>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Builder</h6>
+							</th>
+							<th>Problem Statement </th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<small>For example, let’s think about how to create a House object. To build a simple
+									house, you need to construct four walls and a floor, install a door, fit a pair of
+									windows, and build a roof. </small>
+								<small>But what if you want a bigger, brighter house, with a backyard and other goodies
+									(like a heating system, plumbing, and electrical wiring)? </small>
+							</td>
+						</tr>
+					</table>
+					<img src="https://refactoring.guru/images/patterns/diagrams/builder/problem1.png?id=11e715c5c97811f848c48e0f399bb05e"
+						alt="">
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Builder</h6>
+							</th>
+							<th>Initial Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+													<code class="hljs python" data-trim data-line-numbers="|1-7|10-11">
+														<script type="text/template">
+										
+class House:
+	def __init__(self, walls, floor, door, windows, roof):
+		self.walls = walls
+		self.floor = floor
+		self.door = door
+		self.windows = windows
+		self.roof = roof
+
+# Creating instances of different house configurations
+house1 = House(4, "wooden", "single", 2, "shingle")
+house2 = House(4, "brick", "double", 4, "tile")
+									</script>
+													</code>
+												</pre>
+				</section>
+				<section data-transition="slide" data-background="#BB8493" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Builder</h6>
+							</th>
+							<th>Refactored Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+													<code class="hljs python" >
+														<script type="text/template">
+							class Transport:
+							    def deliver(self):
+							        pass
+							
+							class Truck(Transport):
+							    def deliver(self):
+							        print("Delivering by truck...")
+							
+							class Ship(Transport):
+							    def deliver(self):
+							        print("Delivering by ship...")
+							
+							class TransportFactory:
+							    def create_transport(self, transport_type):
+							        if transport_type == 'truck':
+							            return Truck()
+							        elif transport_type == 'ship':
+							            return Ship()
+							
+							class LogisticsApp:
+							    def __init__(self):
+							        self.factory = TransportFactory()
+							
+							    def deliver_package(self, transport_type):
+							        transport = self.factory.create_transport(transport_type)
+							        transport.deliver()
+							
+							if __name__ == "__main__":
+							    app = LogisticsApp()
+							
+							    # Deliver package by truck
+							    app.deliver_package('truck')
+							
+							    # Deliver package by ship
+							    app.deliver_package('ship')
+							
+																</script>
+													</code>
+												</pre>
+				</section>
+				<section data-transition="slide" data-background="#BB8493">
+					<h2>Builder Design Pattern</h2>
+					<div>
+						<table>
+							<tr>
+								<th>Strengths</th>
+								<th>Weaknesses</th>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li><small>Separates the construction of a complex object from its
+												representation.</small></li>
+										<li><small>Allows the same construction process to create different
+												representations.</small>
+										</li>
+										<li><small>Encapsulates the construction code, making it easy to change or
+												extend.</small></li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li><small>Requires creating a concrete builder for each product variation,
+												which can lead to
+												class explosion.</small></li>
+										<li><small>May introduce complexity, especially for simple objects.</small></li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<h6>Use Cases</h6>
+						<ul>
+							<li><small>When the algorithm for creating a complex object should be independent of the
+									object's parts and
+									how they're assembled.</small></li>
+							<li><small>To construct objects step by step, allowing different configurations of the same
+									object creation
+									process.</small></li>
+							<li><small>When a class wants to avoid the telescoping constructor anti-pattern or the
+									excessive number of
+									constructors.</small></li>
+						</ul>
+					</div>
+				</section>
+
+			</section>
+			<section data-transition="slide" data-background="#9B3922" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Section 3</h6>
+						</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h3>Structural Design Patterns</h3>
+						</td>
+					</tr>
+				</table>
+			</section>
+			<section data-transition="slide" data-background="#795458" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Section 4</h6>
+						</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h3>Behavioral Design Patterns</h3>
+						</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<table>
+					<tr>
+						<th>
+							<h6>Section 5</h6>
+						</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h3>Application and Best Practices</h3>
+						</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<table>
+					<tr>
+						<th>
+							<h6>Section 6</h6>
+						</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h3>Case Studies and Real-World Examples</h3>
+						</td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<table>
+					<tr>
+						<th>
+							<h6>Section 7</h6>
+						</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h3>Conclusion and Q&A</h3>
+						</td>
+					</tr>
+				</table>
+			</section>
+			<section style="text-align: left;">
+				<h1>THE END</h1>
+				<p> - <a href="https://slides.com">Try the online editor</a>
+					<br> - <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+				</p>
+			</section>
+		</div>
+	</div>
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/zoom/zoom.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/search/search.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			center: true,
+			hash: true,
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+		});
+	</script>
+</body>
+
+</html>
