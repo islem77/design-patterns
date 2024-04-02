@@ -852,22 +852,452 @@ house2 = House(4, "brick", "double", 4, "tile")
 				</section>
 
 			</section>
-			<section data-transition="slide" data-background="#9B3922" data-background-transition="zoom">
-				<table>
-					<tr>
-						<th>
-							<h6>Section 3</h6>
-						</th>
-						<th></th>
-					</tr>
-					<tr>
-						<td></td>
-						<td>
-							<h3>Structural Design Patterns</h3>
-						</td>
-					</tr>
-				</table>
+			<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+				<section>
+					<table>
+						<tr>
+							<th>
+								<h6>Section 3</h6>
+							</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<h3>Structural Design Patterns</h3>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-background="#4d7e65">
+					<div style="text-align: left;">
+						<h2>Structural Design Patterns</h2>
+						<ul>
+							<li>
+								<small>Structural design patterns focus on organizing objects and classes to form larger
+									structures
+									while keeping these structures flexible and efficient.</small>
+							</li>
+							<li>
+								<small>They address the composition of classes and objects to create new functionalities
+									and
+									relationships, promoting code reuse and maintainability.</small>
+							</li>
+						</ul>
+					</div>
+					<img src="dist/structural.png" alt="Structural Design Patterns" />
+				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Adapter</h6>
+							</th>
+							<th>Concept </th>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://refactoring.guru/images/patterns/cards/adapter-mini.png"
+									alt="Adapter">
+							</td>
+							<td>
+								<small>The Adapter pattern allows incompatible interfaces to work together by wrapping
+									the
+									interface of a class with another interface.</small>
+								<small>It acts as a bridge between two incompatible interfaces, converting the interface
+									of a
+									class into another interface expected by the client.</small>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Adapter</h6>
+							</th>
+							<th>Problem Statement</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<p><small>Your stock market monitoring app currently downloads stock data from multiple
+										sources
+										in XML format.</small></p>
+								<p><small>To enhance the app's functionality, you decide to integrate a smart 3rd-party
+										analytics library.</small></p>
+								<p><small>However, the analytics library only supports data in JSON format, presenting a
+										compatibility challenge.</small></p>
+
+							</td>
+						</tr>
+					</table>
+					<img src="https://refactoring.guru/images/patterns/diagrams/adapter/solution-en.png?id=5f4f1b4575236a3853f274b690bd6656"
+						alt="">
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Adapter</h6>
+							</th>
+							<th>Initial Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+														<code class="hljs python" data-trim data-line-numbers="|8-11|21-23|3-6|14-18">
+															<script type="text/template">
+										
+# Original code without using Adapter pattern
+
+class AnalyticsLibrary:
+    def analyze_json_data(self, json_data):
+        # Analyze JSON data
+        pass
+
+# Function to download stock data in XML format
+def download_stock_data():
+    # Code to download stock data in XML format
+    pass
+
+# Function to analyze stock data using the analytics library directly
+def analyze_stock_data():
+    xml_data = download_stock_data()
+    json_data = convert_xml_to_json(xml_data)
+    analytics_library = AnalyticsLibrary()
+    analytics_library.analyze_json_data(json_data)
+
+# Function to convert XML data to JSON format
+def convert_xml_to_json(xml_data):
+    # Code to convert XML data to JSON format
+    pass
+
+				
+									</script>
+														</code>
+													</pre>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Adapter</h6>
+							</th>
+							<th>Refactored Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+														<code class="hljs python" >
+															<script type="text/template">
+# Refactored code using Adapter pattern
+
+class XmlToJsonAdapter:
+    def __init__(self, analytics_library):
+        self.analytics_library = analytics_library
+
+    def analyze_xml_data(self):
+        xml_data = download_stock_data()
+        json_data = convert_xml_to_json(xml_data)
+        self.analytics_library.analyze_json_data(json_data)
+
+# Function to download stock data in XML format
+def download_stock_data():
+    # Code to download stock data in XML format
+    pass
+
+# Function to convert XML data to JSON format
+def convert_xml_to_json(xml_data):
+    # Code to convert XML data to JSON format
+    pass
+
+# Usage
+analytics_library = AnalyticsLibrary()
+adapter = XmlToJsonAdapter(analytics_library)
+adapter.analyze_xml_data()
+
+				
+													</script>
+														</code>
+													</pre>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65">
+					<h2>Adapter Design Pattern</h2>
+					<div>
+						<table>
+							<tr>
+								<th> Strengths </th>
+								<th> Weaknesses </th>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li>
+											<small>Converts interfaces to make objects work together.</small>
+										</li>
+										<li>
+											<small>Helps with integrating incompatible interfaces.</small>
+										</li>
+										<li>
+											<small>Enables collaboration between objects with different
+												interfaces.</small>
+										</li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li>
+											<small>Can introduce additional complexity.</small>
+										</li>
+										<li>
+											<small>May require creating multiple adapters for different
+												scenarios.</small>
+										</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<h6>Use Cases</h6>
+						<ul>
+							<li>
+								<small>Integrating legacy systems with modern systems.</small>
+							</li>
+							<li>
+								<small>Working with third-party libraries with incompatible interfaces.</small>
+							</li>
+							<li>
+								<small>Adapting interfaces to meet specific system requirements.</small>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Bridge</h6>
+							</th>
+							<th>Concept </th>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://refactoring.guru/images/patterns/cards/bridge-mini.png" alt="Bridge">
+							</td>
+							<td>
+								<small>The Bridge pattern separates the abstraction from its implementation, allowing
+									them to vary
+									independently.</small>
+								<small>It enables you to change the implementation details of an abstraction without
+									modifying
+									its interface, promoting flexibility and decoupling.</small>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Bridge</h6>
+							</th>
+							<th>Problem Statement</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<p><small>Bridge pattern splits a class hierarchy into two separate
+										hierarchies—abstraction and
+										implementation—allowing independent development.</small></p>
+								<p><small>For instance, extending a Shape class hierarchy with colors results in an
+										exponential growth
+										of subclasses, making maintenance difficult.</small></p>
+							</td>
+						</tr>
+					</table>
+					<img src="https://refactoring.guru/images/patterns/diagrams/bridge/problem-en.png?id=81f8ed6e6f5d673e15203b22a7a3c502"
+						alt="">
+				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Bridge</h6>
+							</th>
+							<th>Initial Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+																		<code class="hljs python" >
+																			<script type="text/template">
+														
+# Existing code without the Bridge pattern
+
+class Shape:
+    def __init__(self):
+        pass
+
+class Circle(Shape):
+    def draw(self):
+        pass
+
+class Square(Shape):
+    def draw(self):
+        pass
+
+class RedCircle(Circle):
+    def draw(self):
+        pass
+
+class RedSquare(Square):
+    def draw(self):
+        pass
+
+class BlueCircle(Circle):
+    def draw(self):
+        pass
+
+class BlueSquare(Square):
+    def draw(self):
+        pass
+
+				
+								
+													</script>
+																		</code>
+																	</pre>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Adapter</h6>
+							</th>
+							<th>Refactored Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+																		<code class="hljs python" >
+															<script type="text/template">
+# Refactored code using the Bridge pattern
+
+# Abstraction classes
+class Shape:
+    def __init__(self, color):
+        self.color = color
+
+    def draw(self):
+        pass
+
+class Circle(Shape):
+    def draw(self):
+        pass
+
+class Square(Shape):
+    def draw(self):
+        pass
+
+# Implementation classes
+class Color:
+    def fill(self):
+        pass
+
+class Red(Color):
+    def fill(self):
+        pass
+
+class Blue(Color):
+    def fill(self):
+        pass
+
+# Bridge classes
+class CircleBridge(Circle):
+    def __init__(self, color):
+        super().__init__(color)
+
+    def draw(self):
+        self.color.fill()
+        super().draw()
+
+class SquareBridge(Square):
+    def __init__(self, color):
+        super().__init__(color)
+
+    def draw(self):
+        self.color.fill()
+        super().draw()
+
+				
+								
+																	</script>
+																		</code>
+																	</pre>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65">
+					<h2>Bridge Design Pattern</h2>
+					<div>
+						<table>
+							<tr>
+								<th>Strengths</th>
+								<th>Weaknesses</th>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li><small>Decouples abstraction from implementation.</small></li>
+										<li><small>Allows for independent development of abstraction and
+												implementation.</small></li>
+										<li><small>Facilitates easier maintenance and extensibility.</small></li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li><small>May increase complexity due to additional layers.</small></li>
+										<li><small>Requires careful design to define abstraction and implementation
+												hierarchies.</small>
+										</li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<h6>Use Cases</h6>
+						<ul>
+							<li><small>When changes in the implementation should not affect the abstraction.</small>
+							</li>
+							<li><small>When a system should be extensible with minimal impact.</small></li>
+							<li><small>When abstraction and implementation hierarchies need to be independent.</small>
+							</li>
+						</ul>
+					</div>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Composite</h6>
+							</th>
+							<th>Concept </th>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://refactoring.guru/images/patterns/cards/composite-mini.png"
+									alt="Composite">
+							</td>
+							<td>
+								<small>The Composite pattern composes objects into tree structures to represent
+									part-whole
+									hierarchies.</small>
+								<small>It allows clients to treat individual objects and compositions of objects
+									uniformly,
+									simplifying the client code.</small>
+							</td>
+						</tr>
+					</table>
+				</section>
 			</section>
+
 			<section data-transition="slide" data-background="#795458" data-background-transition="zoom">
 				<table>
 					<tr>
