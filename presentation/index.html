@@ -947,7 +947,7 @@ house2 = House(4, "brick", "double", 4, "tile")
 						</tr>
 					</table>
 					<pre data-id="code-animation">
-														<code class="hljs python" data-trim data-line-numbers="|8-11|21-23|3-6|14-18">
+														<code class="hljs python" data-trim data-line-numbers="">
 															<script type="text/template">
 										
 # Original code without using Adapter pattern
@@ -1172,7 +1172,7 @@ class BlueSquare(Square):
 					<table>
 						<tr>
 							<th>
-								<h6>Adapter</h6>
+								<h6>Bridge</h6>
 							</th>
 							<th>Refactored Code </th>
 						</tr>
@@ -1296,9 +1296,177 @@ class SquareBridge(Square):
 						</tr>
 					</table>
 				</section>
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Composite</h6>
+							</th>
+							<th>Problem Statement</th>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<p><small>The Composite pattern composes objects into tree structures to represent part-whole hierarchies.</small></p>
+								<p><small>For example, managing graphical shapes that can be simple objects or complex compositions of other shapes.</small></p>
+							</td>
+						</tr>
+					</table>
+					<img src="https://refactoring.guru/images/patterns/diagrams/composite/problem-en.png?id=3320d7ddc5bdc3e43752bb4393710794" alt="">
+				</section>
+				
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Composite</h6>
+							</th>
+							<th>Initial Code</th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+						<code class="hljs python">
+							<script type="text/template">	
+# Initial code without the Composite pattern
+
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+class Box:
+    def __init__(self, name):
+        self.name = name
+        self.products = []
+
+    def add_product(self, product):
+        self.products.append(product)
+
+    def calculate_total_price(self):
+        total_price = 0
+        for product in self.products:
+            total_price += product.price
+        return total_price
+
+# Usage
+if __name__ == "__main__":
+    # Creating products
+    product1 = Product("Laptop", 1000)
+    product2 = Product("Headphones", 100)
+    
+    # Creating boxes
+    box1 = Box("Box 1")
+    box1.add_product(product1)
+    box1.add_product(product2)
+    
+    print("Total price of Box 1:", box1.calculate_total_price())
+
+				</script>
+						</code>
+					</pre>
+				</section>
+				
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<table>
+						<tr>
+							<th>
+								<h6>Composite</h6>
+							</th>
+							<th>Refactored Code </th>
+						</tr>
+					</table>
+					<pre data-id="code-animation">
+																		<code class="hljs python" >
+															<script type="text/template">
+
+# Refactored code using the Composite pattern
+
+class Component:
+    def calculate_total_price(self):
+        pass
+
+class Product(Component):
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+    def calculate_total_price(self):
+        return self.price
+
+class Box(Component):
+    def __init__(self, name):
+        self.name = name
+        self.children = []
+
+    def add(self, component):
+        self.children.append(component)
+
+    def remove(self, component):
+        self.children.remove(component)
+
+    def calculate_total_price(self):
+        total_price = 0
+        for child in self.children:
+            total_price += child.calculate_total_price()
+        return total_price
+
+# Usage
+if __name__ == "__main__":
+    # Creating products
+    product1 = Product("Laptop", 1000)
+    product2 = Product("Headphones", 100)
+    
+    # Creating boxes
+    box1 = Box("Box 1")
+    box1.add(product1)
+    box1.add(product2)
+    
+    print("Total price of Box 1:", box1.calculate_total_price())
+
+				
+								
+																	</script>
+																		</code>
+																	</pre>
+				</section>
+				<section data-transition="slide" data-background="#4d7e65">
+					<h2>Composite Design Pattern</h2>
+					<div>
+						<table>
+							<tr>
+								<th>Strengths</th>
+								<th>Weaknesses</th>
+							</tr>
+							<tr>
+								<td>
+									<ul>
+										<li><small>Enables the creation of complex tree structures.</small></li>
+										<li><small>Allows for treating individual objects and compositions of objects uniformly.</small></li>
+										<li><small>Facilitates hierarchical representation of part-whole relationships.</small></li>
+									</ul>
+								</td>
+								<td>
+									<ul>
+										<li><small>May introduce overhead in managing tree structures.</small></li>
+										<li><small>Requires careful design to balance flexibility and performance.</small></li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+						<h6>Use Cases</h6>
+						<ul>
+							<li><small>When the core model of the application can be represented as a tree structure.</small></li>
+							<li><small>When part-whole hierarchies need to be manipulated uniformly.</small></li>
+							<li><small>When a hierarchical representation is needed to manage complex relationships.</small></li>
+						</ul>
+					</div>
+				</section>
+								
 			</section>
 
-			<section data-transition="slide" data-background="#795458" data-background-transition="zoom">
+
+<section>
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
 				<table>
 					<tr>
 						<th>
@@ -1313,7 +1481,538 @@ class SquareBridge(Square):
 						</td>
 					</tr>
 				</table>
+				
 			</section>
+			<section data-background="#FBAF62">
+				<div style="text-align: left;">
+					<h2>Behavioral Design Patterns</h2>
+					<ul>
+						<li>
+							<small>Behavioral design patterns focus on defining algorithms and communication patterns between objects to help them collaborate.</small>
+						</li>
+						<li>
+							<small>They address the interaction and responsibility distribution among objects, promoting flexibility and extensibility.</small>
+						</li>
+					</ul>
+					
+				</div>
+				<img src="dist/behavioral.png"/>
+			</section>
+
+
+
+
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Chain of Responsibility</h6>
+						</th>
+						<th>Problem Statement</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<p><small>The Chain of Responsibility pattern allows multiple objects to handle a request without specifying the receiver explicitly.</small></p>
+							<p><small>For instance, in a support ticket system, requests can be passed through a chain of handlers until one of them handles it.</small></p>
+						</td>
+					</tr>
+				</table>
+				<img src="https://refactoring.guru/images/patterns/diagrams/chain-of-responsibility/problem-en.png?id=6f3fc2125aa5ab07b4e1d426422f44c2" alt="">
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Chain of Responsibility</h6>
+						</th>
+						<th>Initial Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" data-trim data-line-numbers="">
+						<script type="text/template">
+					
+			# Initial code without the Chain of Responsibility pattern
+			
+			class Handler:
+				def handle_request(self, request):
+					pass
+			
+			class ConcreteHandler1(Handler):
+				def handle_request(self, request):
+					pass
+			
+			class ConcreteHandler2(Handler):
+				def handle_request(self, request):
+					pass
+			
+			# Client code
+			if __name__ == "__main__":
+				handler1 = ConcreteHandler1()
+				handler2 = ConcreteHandler2()
+				handler1.handle_request(request)
+				handler2.handle_request(request)
+			
+							</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Chain of Responsibility</h6>
+						</th>
+						<th>Refactored Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" >
+						<script type="text/template">
+			# Refactored code using the Chain of Responsibility pattern
+			
+			class Handler:
+				def __init__(self, successor=None):
+					self._successor = successor
+			
+				def handle_request(self, request):
+					if self._successor:
+						self._successor.handle_request(request)
+			
+			class ConcreteHandler1(Handler):
+				def handle_request(self, request):
+					if can_handle_request(request):
+						# handle the request
+					else:
+						super().handle_request(request)
+			
+			class ConcreteHandler2(Handler):
+				def handle_request(self, request):
+					if can_handle_request(request):
+						# handle the request
+					else:
+						super().handle_request(request)
+			
+			# Client code
+			if __name__ == "__main__":
+				handler1 = ConcreteHandler1(ConcreteHandler2())
+				handler1.handle_request(request)
+			
+						</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62">
+				<h2>Chain of Responsibility Design Pattern</h2>
+				<div>
+					<table>
+						<tr>
+							<th>Strengths</th>
+							<th>Weaknesses</th>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li><small>Decouples senders and receivers of requests.</small></li>
+									<li><small>Allows adding or modifying request handlers dynamically.</small></li>
+									<li><small>Reduces coupling in the system.</small></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li><small>May lead to unhandled requests if the chain is not properly configured.</small></li>
+									<li><small>Can introduce performance overhead due to the sequential nature of handling.</small></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+					<h6>Use Cases</h6>
+					<ul>
+						<li><small>Request processing pipelines.</small></li>
+						<li><small>Event handling systems.</small></li>
+						<li><small>Error logging and error handling systems.</small></li>
+					</ul>
+				</div>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Command</h6>
+						</th>
+						<th>Problem Statement</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<p><small>The Command pattern encapsulates a request as an object, thereby allowing parameterization of clients with queues, requests, and operations.</small></p>
+							<p><small>For example, in a text editor, undo and redo operations can be implemented using the Command pattern.</small></p>
+						</td>
+					</tr>
+				</table>
+				<img src="https://refactoring.guru/images/patterns/diagrams/command/problem-en.png?id=f57fc98e51e1b2d6c054e89cbf562135" alt="">
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Command</h6>
+						</th>
+						<th>Initial Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" data-trim data-line-numbers="">
+						<script type="text/template">
+					
+			# Initial code without the Command pattern
+			
+			class Receiver:
+				def action(self):
+					pass
+			
+			class Invoker:
+				def set_command(self, command):
+					pass
+			
+				def execute_command(self):
+					pass
+			
+			class ConcreteCommand1:
+				def __init__(self, receiver):
+					self._receiver = receiver
+			
+				def execute(self):
+					self._receiver.action()
+			
+			class ConcreteCommand2:
+				def __init__(self, receiver):
+					self._receiver = receiver
+			
+				def execute(self):
+					self._receiver.action()
+			
+			# Client code
+			if __name__ == "__main__":
+				receiver = Receiver()
+				command1 = ConcreteCommand1(receiver)
+				command2 = ConcreteCommand2(receiver)
+				invoker = Invoker()
+				invoker.set_command(command1)
+				invoker.execute_command()
+				invoker.set_command(command2)
+				invoker.execute_command()
+			
+							</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Command</h6>
+						</th>
+						<th>Refactored Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" >
+						<script type="text/template">
+			# Refactored code using the Command pattern
+			
+			class Command:
+				def execute(self):
+					pass
+			
+			class ConcreteCommand1(Command):
+				def __init__(self, receiver):
+					self._receiver = receiver
+			
+				def execute(self):
+					self._receiver.action()
+			
+			class ConcreteCommand2(Command):
+				def __init__(self, receiver):
+					self._receiver = receiver
+			
+				def execute(self):
+					self._receiver.action()
+			
+			class Invoker:
+				def __init__(self):
+					self._commands = []
+			
+				def add_command(self, command):
+					self._commands.append(command)
+			
+				def execute_commands(self):
+					for command in self._commands:
+						command.execute()
+			
+			# Client code
+			if __name__ == "__main__":
+				receiver = Receiver()
+				command1 = ConcreteCommand1(receiver)
+				command2 = ConcreteCommand2(receiver)
+				invoker = Invoker()
+				invoker.add_command(command1)
+				invoker.add_command(command2)
+				invoker.execute_commands()
+			
+						</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62">
+				<h2>Command Design Pattern</h2>
+				<div>
+					<table>
+						<tr>
+							<th>Strengths</th>
+							<th>Weaknesses</th>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li><small>Decouples sender and receiver of a request.</small></li>
+									<li><small>Allows parameterization of objects with operations.</small></li>
+									<li><small>Supports undoable operations and macros.</small></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li><small>May lead to a proliferation of command classes.</small></li>
+									<li><small>Can introduce complexity in maintaining the command queue.</small></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+					<h6>Use Cases</h6>
+					<ul>
+						<li><small>GUI actions and menu operations.</small></li>
+						<li><small>Transaction management systems.</small></li>
+						<li><small>Multi-level undo and redo mechanisms.</small></li>
+					</ul>
+				</div>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Iterator</h6>
+						</th>
+						<th>Concept </th>
+					</tr>
+					<tr>
+						<td>
+							<img src="https://refactoring.guru/images/patterns/cards/iterator-mini.png" alt="Iterator">
+						</td>
+						<td>
+							<small>The Iterator pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.</small>
+							<small>It abstracts the traversal of a collection, making it possible to iterate over different types of collections using a common interface.</small>
+						</td>
+					</tr>
+				</table>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Iterator</h6>
+						</th>
+						<th>Problem Statement</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<p><small>The Iterator pattern simplifies the traversal of a collection of elements without exposing its internal structure.</small></p>
+							<p><small>For example, iterating over elements of a linked list or an array without knowing its implementation details.</small></p>
+						</td>
+					</tr>
+				</table>
+				<img src="https://refactoring.guru/images/patterns/diagrams/iterator/problem-en.png?id=801f8c31ebc06a9a883fc43c6e9f9f3b" alt="">
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Iterator</h6>
+						</th>
+						<th>Initial Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" data-trim data-line-numbers="">
+						<script type="text/template">
+			# Initial code without the Iterator pattern
+			
+			class Aggregate:
+				def create_iterator(self):
+					pass
+			
+			class ConcreteAggregate(Aggregate):
+				def __init__(self):
+					self._data = []
+			
+				def add_item(self, item):
+					self._data.append(item)
+			
+			class Iterator:
+				def next(self):
+					pass
+			
+				def has_next(self):
+					pass
+			
+			class ConcreteIterator(Iterator):
+				def __init__(self, aggregate):
+					self._aggregate = aggregate
+					self._index = 0
+			
+				def next(self):
+					pass
+			
+				def has_next(self):
+					pass
+			
+			# Client code
+			if __name__ == "__main__":
+				aggregate = ConcreteAggregate()
+				aggregate.add_item("Item 1")
+				aggregate.add_item("Item 2")
+				iterator = aggregate.create_iterator()
+				while iterator.has_next():
+					print(iterator.next())
+			
+							</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Iterator</h6>
+						</th>
+						<th>Refactored Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" >
+						<script type="text/template">
+			# Refactored code using the Iterator pattern
+			
+			class Iterator:
+				def next(self):
+					pass
+			
+				def has_next(self):
+					pass
+			
+			class ConcreteIterator(Iterator):
+				def __init__(self, aggregate):
+					self._aggregate = aggregate
+					self._index = 0
+			
+				def next(self):
+					pass
+			
+				def has_next(self):
+					pass
+			
+			class Aggregate:
+				def create_iterator(self):
+					pass
+			
+			class ConcreteAggregate(Aggregate):
+				def __init__(self):
+					self._data = []
+			
+				def add_item(self, item):
+					self._data.append(item)
+			
+				def create_iterator(self):
+					return ConcreteIterator(self)
+			
+			# Client code
+			if __name__ == "__main__":
+				aggregate = ConcreteAggregate()
+				aggregate.add_item("Item 1")
+				aggregate.add_item("Item 2")
+				iterator = aggregate.create_iterator()
+				while iterator.has_next():
+					print(iterator.next())
+			
+						</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#FBAF62">
+				<h2>Iterator Design Pattern</h2>
+				<div>
+					<table>
+						<tr>
+							<th>Strengths</th>
+							<th>Weaknesses</th>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li><small>Encapsulates the traversal of a collection.</small></li>
+									<li><small>Supports multiple simultaneous traversals.</small></li>
+									<li><small>Allows collections to vary independently of how they are traversed.</small></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li><small>May be inefficient for some collections.</small></li>
+									<li><small>Can introduce complexity in managing iterators.</small></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+					<h6>Use Cases</h6>
+					<ul>
+						<li><small>Traversal of different data structures (e.g., lists, trees, graphs).</small></li>
+						<li><small>Processing elements of a collection without exposing its internal representation.</small></li>
+						<li><small>Supporting multiple traversal strategies.</small></li>
+					</ul>
+				</div>
+			</section>
+			
+			</section>
+			
+
+
+
+
+
+
+
+		</section>
+
+
+
+
+
+
+
+<section data-background="#4d7e65">
+	
 			<section>
 				<table>
 					<tr>
@@ -1330,27 +2029,145 @@ class SquareBridge(Square):
 					</tr>
 				</table>
 			</section>
-			<section>
+
+			<section data-transition="slide" data-background="#337863" data-background-transition="zoom">
 				<table>
 					<tr>
 						<th>
-							<h6>Section 6</h6>
+							<h6>Clean Code</h6>
 						</th>
-						<th></th>
+						<th>Problem Statement</th>
 					</tr>
 					<tr>
 						<td></td>
 						<td>
-							<h3>Case Studies and Real-World Examples</h3>
+							<p><small>The main purpose of refactoring is to fight technical debt. It transforms a mess into clean code and simple design.</small></p>
+							<p><small>Nice! But what’s clean code, anyway? Here are some of its features:</small></p>
+							<ul>
+								<li><small>Clean code is obvious for other programmers.</small></li>
+								<li><small>Clean code doesn’t contain duplication.</small></li>
+								<li><small>Clean code contains a minimal number of classes and other moving parts.</small></li>
+								<li><small>Clean code passes all tests.</small></li>
+							</ul>
 						</td>
 					</tr>
 				</table>
+				<!-- Optional: You can include an image if applicable -->
+				<!-- <img src="image_url_here" alt=""> -->
 			</section>
-			<section>
+			
+			<section data-transition="slide" data-background="#337863" data-background-transition="zoom">
 				<table>
 					<tr>
 						<th>
-							<h6>Section 7</h6>
+							<h6>Clean Code</h6>
+						</th>
+						<th>Initial Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" data-trim data-line-numbers="">
+						<script type="text/template">
+					
+			# Initial code with dirty practices
+			
+			class MessyCode:
+				def obvious_for_other_programmers(self):
+					pass
+			
+				def contains_duplication(self):
+					pass
+			
+				def contains_many_parts(self):
+					pass
+			
+				def passes_few_tests(self):
+					pass
+			
+			# Client code
+			if __name__ == "__main__":
+				code = MessyCode()
+				code.obvious_for_other_programmers()
+				code.contains_duplication()
+				code.contains_many_parts()
+				code.passes_few_tests()
+			
+							</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#337863" data-background-transition="zoom">
+				<table>
+					<tr>
+						<th>
+							<h6>Clean Code</h6>
+						</th>
+						<th>Refactored Code </th>
+					</tr>
+				</table>
+				<pre data-id="code-animation">
+					<code class="hljs python" >
+						<script type="text/template">
+					
+			# Refactored clean code
+			
+			class CleanCode:
+				def obvious_for_other_programmers(self):
+					pass
+			
+				def doesnt_contain_duplication(self):
+					pass
+			
+				def contains_few_parts(self):
+					pass
+			
+				def passes_all_tests(self):
+					pass
+			
+			# Client code
+			if __name__ == "__main__":
+				code = CleanCode()
+				code.obvious_for_other_programmers()
+				code.doesnt_contain_duplication()
+				code.contains_few_parts()
+				code.passes_all_tests()
+			
+							</script>
+					</code>
+				</pre>
+			</section>
+			
+			<section data-transition="slide" data-background="#337863">
+				<h2>Clean Code Principles</h2>
+				<div>
+					<table>
+						<tr>
+							<th>Features</th>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li><small>Clean code is obvious for other programmers.</small></li>
+									<li><small>Clean code doesn’t contain duplication.</small></li>
+									<li><small>Clean code contains a minimal number of classes and other moving parts.</small></li>
+									<li><small>Clean code passes all tests.</small></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</section>
+
+			
+
+		</section>
+		<section>
+			<section data-background="#334478">
+				<table>
+					<tr>
+						<th>
+							<h6>Section 6</h6>
 						</th>
 						<th></th>
 					</tr>
@@ -1362,10 +2179,28 @@ class SquareBridge(Square):
 					</tr>
 				</table>
 			</section>
-			<section style="text-align: left;">
-				<h1>THE END</h1>
-				<p> - <a href="https://slides.com">Try the online editor</a>
-					<br> - <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+			<section data-transition="slide" data-background="#334478" data-background-transition="zoom">
+				<h2>Conclusion</h2>
+				<div>
+					<p><small>In conclusion, design patterns provide reusable solutions to common problems encountered in software development. By following established patterns, developers can create more maintainable, flexible, and scalable software systems.</small></p>
+					<p><small>Throughout this presentation, we have explored several design patterns. Each pattern addresses specific challenges and offers unique advantages.</small></p>
+					<p><small>By understanding these patterns and applying them appropriately, developers can enhance the quality of their code and improve overall system architecture.</small></p>
+				</div>
+			</section>
+			
+			<section data-transition="slide" data-background="#334478" data-background-transition="zoom">
+				<h2>Q&A</h2>
+				<div>
+					<p><small>Now, let's open the floor for questions and answers. Feel free to ask any questions you have about the design patterns discussed in this presentation or any related topics.</small></p>
+				</div>
+			</section>
+</section>			
+
+<section style="text-align: left;" data-background="#64B860">
+
+				<h1>THANK YOU FOR YOUR ATTENTION!</h1>
+				<p> <a href="https://slides.com"></a>
+					<br>  <a href="https://github.com/hakimel/reveal.js"></a>
 				</p>
 			</section>
 		</div>
